@@ -24,9 +24,10 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   }
 
   ngOnInit() {
-    console.log('queryParams', this.route.snapshot.queryParams);
-    console.log('fragm', this.route.snapshot.fragment);
-    console.log('params', this.route.snapshot.params);
+    // console.log('queryParams', this.route.snapshot.queryParams);
+    // console.log('fragm', this.route.snapshot.fragment);
+    // console.log('params', this.route.snapshot.params);
+    // this.route.fragment.subscribe(value => console.log(value));
     this.route.queryParams
       .subscribe((qParams: Params) => {
         this.allowEdit = qParams['allowEdit'] === '1';
@@ -34,11 +35,10 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     this.route.params.subscribe((params: Params) => {
       this.server = this.serversService.getServer(+params['id']);
     });
-    this.route.fragment.subscribe(value => console.log(value));
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
     !this.allowEdit && setTimeout(() => {
-        this.router.navigate(['../'], {relativeTo: this.route});
+      this.router.navigate(['../'], {relativeTo: this.route});
     }, 2000);
   }
 
